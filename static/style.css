@@ -1,0 +1,263 @@
+.product-card {
+    position: relative;
+    border: 1px solid #eee;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    transition: transform 0.2s ease-in-out;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #fff;
+    margin: 10px;
+    float: right;
+    padding: 10px;
+
+}
+
+.product-card img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    background: #f6f6f6;
+}
+
+.product-card-body {
+    padding: 18px 20px 14px 20px;
+    color:red;
+}
+
+.product-card-title {
+    font-size: 1.14rem;
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: red;
+
+}
+
+.product-card-category {
+    font-size: 0.97rem;
+    color: #757575;
+    margin-bottom: 8px;
+}
+
+.product-card-description {
+    font-size: 1rem;
+    color: #444;
+    margin-bottom: 18px;
+}
+
+.product-card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.product-card-price {
+    font-size: 1.25rem;
+    color: red;
+    font-weight: bold;
+    font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+.admin-card {
+    background: #fff;
+    border-radius: 12px;
+    margin: 40px auto 0 auto;
+    max-width: 900px;
+    padding: 32px 40px 32px 40px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+}
+.admin-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.admin-header h2 {
+    margin: 0;
+}
+.logout-btn {
+    background: #c0392b;
+    color: #fff;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 5px;
+    font-weight: 500;
+    cursor: pointer;
+}
+.admin-form-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 16px;
+    margin-top: 24px;
+}
+.admin-form-table td {
+    vertical-align: top;
+    padding: 0 8px;
+}
+.form-label {
+    font-weight: 500;
+    margin-bottom: 6px;
+    display: block;
+}
+.form-input, .form-textarea, .form-select {
+    width: 100%;
+    padding: 8px 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+.form-textarea {
+    resize: vertical;
+}
+.form-actions {
+    margin-top: 28px;
+    display: flex;
+    gap: 16px;
+}
+.btn-back {
+    background: #eee;
+    color: #333;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: 500;
+}
+.btn-submit {
+    background: #1976d2;
+    color: #fff;
+    border: none;
+    padding: 10px 28px;
+    border-radius: 5px;
+    font-weight: 500;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-top: 8px;
+    align-self: flex-start;
+}
+
+.admin-layout {
+    display: flex;
+    min-height: 100vh;
+    background: #f6f7f9;
+    position: relative;
+}
+.admin-sidebar {
+    width: 240px;
+    background: #23272b;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    transition: width 0.3s, transform 0.3s;
+    z-index: 100;
+}
+.admin-sidebar.collapsed {
+    width: 0 !important;
+    min-width: 0 !important;
+    overflow: hidden;
+    transform: translateX(-100%);
+}
+.sidebar-header {
+    display: flex;
+    align-items: center;
+    padding: 24px 24px 16px 24px;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+.sidebar-menu-icon {
+    font-size: 1.5rem;
+    margin-right: 10px;
+}
+.sidebar-title {
+    font-size: 1.1rem;
+}
+.sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 0 24px;
+}
+.sidebar-nav a {
+    color: #fff;
+    text-decoration: none;
+    padding: 10px 0;
+    border-radius: 4px;
+    transition: background 0.2s;
+}
+.sidebar-nav a.active,
+.sidebar-nav a:hover {
+    background: #343a40;
+}
+.admin-main {
+    flex: 1;
+    padding: 32px 0 0 0;
+    background: #f6f7f9;
+    min-height: 100vh;
+    transition: margin-left 0.3s;
+}
+.admin-main-header {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 0 48px 0 0;
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+.admin-add-product-link {
+    color: #23272b;
+}
+.admin-form-container {
+    background: #fff;
+    margin: 32px 48px 0 48px;
+    padding: 32px 40px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    max-width: 900px;
+}
+.admin-form-container h2 {
+    margin-top: 0;
+    margin-bottom: 24px;
+    font-size: 1.5rem;
+    font-weight: 500;
+}
+.admin-form-vertical {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+.admin-form-vertical label {
+    font-weight: 500;
+    margin-bottom: 4px;
+}
+.admin-form-vertical input[type="text"],
+.admin-form-vertical input[type="number"],
+.admin-form-vertical input[type="file"],
+.admin-form-vertical textarea {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+    background: #f8f9fa;
+}
+.admin-form-vertical textarea {
+    resize: vertical;
+}
+
+@media (max-width: 900px) {
+    .admin-sidebar {
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 100vh;
+        box-shadow: 2px 0 8px rgba(0,0,0,0.08);
+    }
+    .admin-main {
+        padding-left: 0;
+    }
+}
+
+
+
+
+
+

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Your Order Summary</title>
+</head>
+<body style="font-family:sans-serif;max-width:500px;margin:auto;">
+    <h3 style="text-align:center;margin-bottom:16px;border-bottom:1px solid #eee;padding-bottom:8px;">Your Order Summary</h3>
+    {% for item in cart %}
+    <div style="display:flex;align-items:flex-start;margin-bottom:18px;">
+        <img src="{% if item.image and item.image.startswith('http') %}{{ item.image }}{% else %}/static/images/{{ item.image }}{% endif %}" style="width:110px;border-radius:8px;margin-right:18px;">
+        <div style="flex:1;">
+            <b>{{ item.title }}</b><br>
+            Size: {{ item.size if item.size is defined else '-' }}<br>
+            Color: {{ item.color if item.color is defined else '-' }}<br>
+            Quantity: {{ item.quantity }}<br>
+        </div>
+        <div style="font-weight:bold;font-size:1.1em;">${{ '%.2f' | format(item.price * item.quantity) }}</div>
+    </div>
+    {% endfor %}
+    <table style="width:100%;font-size:1.1em;margin-bottom:18px;">
+        <tr><td>Subtotal</td><td style="text-align:right;">${{ '%.2f' | format(total) }}</td></tr>
+        <tr><td>Shipping</td><td style="text-align:right;">${{ '%.2f' | format(shipping) }}</td></tr>
+        <tr><td>Tax</td><td style="text-align:right;">${{ '%.2f' | format(tax) }}</td></tr>
+        <tr style="font-weight:bold;font-size:1.2em;"><td>Total</td><td style="text-align:right;">${{ '%.2f' | format(grand_total) }}</td></tr>
+    </table>
+    <div style="font-size:1em;margin-bottom:8px;"><b>Name:</b> {{ customer_name }}<br><b>Email:</b> {{ customer_email }}<br><b>Phone:</b> {{ customer_phone }}</div>
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard - Add Product</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <!-- Bootstrap CSS -->
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1lmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+</head>
+<body>
+
+    {% include 'Navbar.html' %}
+    <header style="background: #23272b; color: #fff; padding: 18px 0 18px 32px; margin-bottom: 0;">
+        <h1 style="margin: 0; font-size: 2rem; font-weight: 600; letter-spacing: 1px;">Admin Panel</h1>
+    </header>
+    <div class="admin-layout">
+        <aside class="admin-sidebar">
+            <div class="sidebar-header">
+                <span class="sidebar-menu-icon" id="sidebarToggle">&#9776;</span>
+                <span class="sidebar-title">Admin Panel</span>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="{{ url_for('add_product') }}" class="active">Add Product</a>
+                <a href="{{ url_for('admin') }}">Product List</a>
+                <a href="{{ url_for('logout') }}">Logout</a>
+            </nav>
+        </aside>
+        <main class="admin-main">
+            <div class="admin-main-header">
+                <span></span>
+                <span class="admin-add-product-link">Add Product</span>
+            </div>
+            <div class="admin-form-container">
+                <h2>Admin Dashboard</h2>
+                <h3 style="margin-top:32px;">Add New Product</h3>
+                <form method="post" enctype="multipart/form-data" class="admin-form-vertical">
+                    <label for="title">Product Name</label>
+                    <input type="text" name="title" id="title" required>
+                    <label for="category">Category</label>
+                    <input type="text" name="category" id="category" required>
+                    <label for="price">Price</label>
+                    <input type="number" name="price" id="price" step="0.01" required>
+                    <label for="details">Description</label>
+                    <textarea name="details" id="details" rows="4" required></textarea>
+                    <label for="image">Product Image (Upload)</label>
+                    <input type="file" name="image" id="image" accept="image/*">
+                    <label for="image_url">Or Image URL</label>
+                    <input type="url" name="image_url" id="image_url" placeholder="https://example.com/image.jpg">
+                    <button type="submit" class="btn-submit">Add Product</button>
+                    <a href="{{ url_for('admin') }}" class="btn-back">Back to Admin</a>
+                </form>
+            </div>
+        </main>
+    </div>
+    <script>
+    // Hamburger sidebar toggle
+    document.addEventListener('DOMContentLoaded', function() {
+        var sidebar = document.querySelector('.admin-sidebar');
+        var toggle = document.getElementById('sidebarToggle');
+        if (toggle) {
+            toggle.addEventListener('click', function() {
+                sidebar.classList.toggle('collapsed');
+            });
+        }
+    });
+    </script>
+</body>
+</html>

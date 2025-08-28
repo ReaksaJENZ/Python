@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Checkout</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <style>
+        body { background: #f7f7f7; }
+        .checkout-container {
+            background: #fff;
+            max-width: 1100px;
+            margin: 40px auto;
+            border-radius: 8px;
+            box-shadow: 0 2px 16px rgba(0,0,0,0.07);
+            display: flex;
+            flex-wrap: wrap;
+            padding: 40px 30px;
+        }
+        .checkout-left, .checkout-right {
+            flex: 1 1 400px;
+            min-width: 340px;
+            margin: 10px 20px;
+        }
+        .checkout-title {
+            font-size: 2.2rem;
+            font-weight: 600;
+            margin-bottom: 32px;
+        }
+        .section-title {
+            font-size: 1.1rem;
+            font-weight: 500;
+            margin-bottom: 12px;
+            letter-spacing: 1px;
+        }
+        .order-summary {
+            border-left: 1px solid #eee;
+            padding-left: 32px;
+        }
+        .order-product {
+            display: flex;
+            align-items: center;
+            margin-bottom: 18px;
+        }
+        .order-product-img {
+            width: 48px; height: 48px; object-fit: cover; border-radius: 6px; margin-right: 16px;
+        }
+        .order-product-info { flex: 1; }
+        .order-product-title { font-weight: 500; }
+        .order-product-qty { font-size: 0.95em; color: #888; }
+        .order-product-price { font-weight: 500; }
+        .order-summary-table { width: 100%; margin-top: 18px; }
+        .order-summary-table td { padding: 4px 0; }
+        .checkout-form input, .checkout-form select {
+            width: 100%;
+            padding: 10px 12px;
+            margin-bottom: 16px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .checkout-form label { font-weight: 500; margin-bottom: 6px; }
+        .checkout-btn-main {
+            width: 100%;
+            background: #3ec6ad;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            padding: 14px 0;
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-top: 18px;
+            transition: background 0.2s;
+        }
+        .checkout-btn-main:hover { background: #2fa18a; }
+        .gift-code-btn {
+            background: #fff;
+            border: 1px solid #3ec6ad;
+            color: #3ec6ad;
+            border-radius: 4px;
+            padding: 8px 0;
+            width: 100%;
+            margin-top: 10px;
+            font-weight: 500;
+        }
+        @media (max-width: 900px) {
+            .checkout-container { flex-direction: column; padding: 20px 5px; }
+            .order-summary { border-left: none; padding-left: 0; margin-top: 32px; }
+        }
+    </style>
+</head>
+<body>
+    {% include 'Navbar.html' %}
+    {% if success %}
+    <div class="container text-center" style="padding: 60px 0;">
+        <h2 class="text-success mb-4">Thank you for your order!</h2>
+        <p>Your order has been placed successfully.</p>
+        <a href="{{ url_for('home') }}" class="btn btn-primary mt-3">Back to Home</a>
+    </div>
+    {% else %}
+    <div class="checkout-container">
+        <div class="checkout-left">
+            <div class="checkout-title">Checkout</div>
+            <form method="post" class="checkout-form">
+                <div class="section-title">CUSTOMER DETAILS</div>
+                <label for="customer_name">Name</label>
+                <input type="text" id="customer_name" name="customer_name" placeholder="Your Name" required>
+                <label for="customer_email">Email</label>
+                <input type="email" id="customer_email" name="customer_email" placeholder="you@email.com" required>
+                <label for="customer_phone">Phone Number</label>
+                <input type="tel" id="customer_phone" name="customer_phone" placeholder="e.g. 555-123-4567" required>
+                <button type="submit" class="checkout-btn-main">PLACE ORDER ${{ '%.2f'|format(total) }}</button>
+            </form>
+        </div>
+        <div class="checkout-right order-summary">
+            <div class="section-title">YOUR ORDER</div>
+            {% for item in cart %}
+            <div class="order-product">
+                <img src="{% if item.image and item.image.startswith('http') %}{{ item.image }}{% else %}/static/images/{{ item.image }}{% endif %}" class="order-product-img" alt="{{ item.title }}">
+                <div class="order-product-info">
+                    <div class="order-product-title">{{ item.title[:20] }}{% if item.title|length > 20 %}...{% endif %}</div>
+                    <div class="order-product-qty">{{ item.quantity }} x {{ item.size or '' }}</div>
+                </div>
+                <div class="order-product-price">${{ '%.2f'|format(item.price * item.quantity) }}</div>
+            </div>
+            {% endfor %}
+            <table class="order-summary-table">
+                <tr><td>Subtotal</td><td class="text-right">${{ '%.2f'|format(total) }}</td></tr>
+                <tr><td>Shipping</td><td class="text-right">$0.00</td></tr>
+                <tr><td><b>Total</b></td><td class="text-right"><b>${{ '%.2f'|format(total) }}</b></td></tr>
+            </table>
+            <button class="gift-code-btn" type="button">ADD GIFT CODE</button>
+        </div>
+    </div>
+    {% endif %}
+</body>
+
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Your Site Title{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="navbar-left">
+            <a href="{{ url_for('home') }}">Home</a>
+            <a href="{{ url_for('cart') }}">
+                Cart <span id="cart-count" class="badge badge-success" style="font-size:0.9em;">0</span>
+            </a>
+        </div>
+        <form class="navbar-search" method="get" action="{{ url_for('home') }}">
+            <input type="text" name="q" placeholder="Category, Title">
+            <button type="submit">Search</button>
+        </form>
+    </nav>
+
+    {% block content %}{% endblock %}
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11">
+
+
+function updateCartCount() {
+    let count = localStorage.getItem('cart_count') || 0;
+    document.getElementById('cart-count').textContent = count;
+}
+updateCartCount();
+
+// Listen for custom event from add-to-cart
+window.addEventListener('cart-updated', function(e) {
+    updateCartCount();
+    if (e.detail && e.detail.title) {
+        Swal.fire({
+            title: "Good job!",
+            text: "You added '" + e.detail.title + "' to cart!",
+            icon: "success"
+        });
+    }
+});
+</script>
+</body>
+</html>
